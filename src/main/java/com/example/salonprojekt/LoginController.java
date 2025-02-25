@@ -37,7 +37,7 @@ public class LoginController {
 
         if (isValid) {
             try {
-                Parent newRoot = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+                Parent newRoot = FXMLLoader.load(getClass().getResource("salon2.fxml"));
                 usernameField.getScene().setRoot(newRoot);
             } catch (IOException e) {
                 e.printStackTrace();
