@@ -11,7 +11,7 @@ import javafx.event.ActionEvent;
 
 import java.io.IOException;
 
-public class LoginController {
+public class LoginController extends BaseController {
     private LoginDatabaseHandler loginDatabaseHandler = new LoginDatabaseHandler();
 
     @FXML
@@ -28,7 +28,7 @@ public class LoginController {
     }
 
     @FXML
-    private void handleLoginButtonAction(ActionEvent event) {
+    private void handleLoginButtonAction(ActionEvent event)  {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
@@ -37,8 +37,13 @@ public class LoginController {
 
         if (isValid) {
             try {
-                Parent newRoot = FXMLLoader.load(getClass().getResource("salon2.fxml"));
-                usernameField.getScene().setRoot(newRoot);
+                sceneManager.switchTo("table");
+
+                usernameField.clear();
+                passwordField.clear();
+//                Parent newRoot = FXMLLoader.load(getClass().getResource("salon2.fxml"));
+//                usernameField.getScene().setRoot(newRoot);
+
             } catch (IOException e) {
                 e.printStackTrace();
                 Alert alert = new Alert(Alert.AlertType.ERROR);
