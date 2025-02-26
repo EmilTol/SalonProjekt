@@ -33,6 +33,9 @@ public class TableController extends BaseController implements Initializable {
     private TableColumn<Table, Double> price;
 
     @FXML
+    private TableColumn<Table, Integer> duration;
+
+    @FXML
     private TableColumn<Table, Integer> time;
 
     @FXML
@@ -54,6 +57,7 @@ public class TableController extends BaseController implements Initializable {
         gender.setCellValueFactory(new PropertyValueFactory<>("customerGender"));
         treatment.setCellValueFactory(new PropertyValueFactory<>("treatmentName"));
         price.setCellValueFactory(new PropertyValueFactory<>("treatmentPrice"));
+        duration.setCellValueFactory(new PropertyValueFactory<>("treatmentDuration"));
         time.setCellValueFactory(new PropertyValueFactory<>("appointmentDatetime"));
         barbar.setCellValueFactory(new PropertyValueFactory<>("employeeName"));
         status.setCellValueFactory(new PropertyValueFactory<>("status"));

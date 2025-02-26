@@ -12,6 +12,7 @@ public class Table {
     private String customerGender;
     private String treatmentName;
     private double treatmentPrice;
+    private int treatmentDuration;
     //tiden skal kaldes med noget der hedder LocalDateTime
     private LocalDateTime appointmentDatetime;
     private String employeeName;
@@ -19,12 +20,13 @@ public class Table {
 
 
     public Table(String customer_name, String customerPhone, String customerGender, String treatmentName, double treatmentPrice,
-                 LocalDateTime appointmentDatetime, String employeeName, String status) {
+                 int treatmentDuration, LocalDateTime appointmentDatetime, String employeeName, String status) {
         this.customer_name = customer_name;
         this.customerPhone = customerPhone;
         this.customerGender = customerGender;
         this.treatmentName = treatmentName;
         this.treatmentPrice = treatmentPrice;
+        this.treatmentDuration = treatmentDuration;
         this.appointmentDatetime = appointmentDatetime;
         this.employeeName = employeeName;
         this.status = status;
@@ -96,4 +98,11 @@ public class Table {
         this.status = status;
     }
 
+    public int getTreatmentDuration() {
+        return treatmentDuration;
+    }
+
+    public void setTreatmentDuration(int treatmentDuration) {
+        this.treatmentDuration = treatmentDuration;
+    }
 }

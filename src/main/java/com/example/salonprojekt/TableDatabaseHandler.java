@@ -20,6 +20,7 @@ public class TableDatabaseHandler {
                 "    a.customer_gender, \n" +
                 "    t.name AS treatment_name, \n" +
                 "    t.standard_price AS treatment_price,\n" +
+                "    t.standard_duration AS treatment_duration,\n" +
                 "    a.appointment_datetime, \n" +
                 "    e.full_name AS employee_name,\n" +
                 "    a.status\n" +
@@ -37,6 +38,7 @@ public class TableDatabaseHandler {
                 String customerGender = rs.getString("customer_gender");
                 String treatmentName = rs.getString("treatment_name");
                 Double treatmentPrice = rs.getDouble("treatment_price");
+                int treatmentDuration = rs.getInt("treatment_duration");
                 //der eksister ikke en LocalDateTime i rs. så man skal converter det til timestamp
                 Timestamp timestamp = rs.getTimestamp("appointment_datetime");
                 LocalDateTime appointmentDatetime = timestamp.toLocalDateTime();
@@ -44,7 +46,7 @@ public class TableDatabaseHandler {
                 String status = rs.getString("status");
 
                 Table table = new Table(customer_name, customerPhone, customerGender, treatmentName, treatmentPrice,
-                        appointmentDatetime, employeeName, status);
+                        treatmentDuration,appointmentDatetime, employeeName, status);
                 list.add(table);
             }
 
