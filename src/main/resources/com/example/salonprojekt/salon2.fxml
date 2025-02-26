@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.salonprojekt.TableController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.salonprojekt.TableController">
    <children>
-      <TableView fx:id="timeTable" layoutX="37.0" layoutY="72.0" prefHeight="275.0" prefWidth="590.0">
+      <TableView fx:id="timeTable" layoutX="37.0" layoutY="72.0" prefHeight="280.0" prefWidth="624.0">
         <columns>
           <TableColumn fx:id="name" prefWidth="75.0" text="Kunde navn" />
           <TableColumn fx:id="number" prefWidth="75.0" text="Nummer" />
@@ -38,7 +38,7 @@
             <Font name="Arial Rounded MT Bold" size="13.0" />
          </font>
       </Button>
-      <Button layoutX="573.0" layoutY="379.0" mnemonicParsing="false" onAction="#switchToStart" prefHeight="30.0" prefWidth="61.0" text="Log ud">
+      <Button layoutX="599.0" layoutY="379.0" mnemonicParsing="false" onAction="#switchToStart" prefHeight="30.0" prefWidth="61.0" text="Log ud">
          <font>
             <Font name="Arial Rounded MT Bold" size="13.0" />
          </font>
