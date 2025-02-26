@@ -26,7 +26,8 @@ public class TableDatabaseHandler {
                 "    a.status\n" +
                 "FROM Appointment a\n" +
                 "JOIN Treatment t ON a.treatment_id = t.id\n" +
-                "JOIN Employee e ON a.employee_id = e.id;";
+                "JOIN Employee e ON a.employee_id = e.id\n" +
+                "WHERE a.status = 'open';";
 
         try (Connection conn = dc.getconnection();
              PreparedStatement stmt = conn.prepareStatement(query);
