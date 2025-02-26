@@ -13,9 +13,9 @@
             <TableColumn fx:id="gender" prefWidth="50.4000244140625" text="Køn" />
             <TableColumn fx:id="treatment" prefWidth="100.0" text="Behandling" />
             <TableColumn fx:id="price" prefWidth="75.0" text="Pris" />
-            <TableColumn fx:id="time" prefWidth="75.0" text="Tid" />
-            <TableColumn fx:id="barbar" prefWidth="75.0" text="Frisør" />
-            <TableColumn fx:id="status" prefWidth="75.0" text="Status" />
+            <TableColumn fx:id="time" prefWidth="95.20001220703125" text="Tid" />
+            <TableColumn fx:id="barbar" prefWidth="84.39999389648438" text="Frisør" />
+            <TableColumn fx:id="status" prefWidth="65.20001220703125" text="Status" />
         </columns>
       </TableView>
       <Label layoutX="196.0" layoutY="21.0" text="Tidsbestillinger">
