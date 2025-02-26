@@ -3,6 +3,7 @@ package com.example.salonprojekt;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -13,6 +14,9 @@ import java.util.ResourceBundle;
 
 
 public class TableController extends BaseController implements Initializable {
+
+    @FXML
+    private CheckBox myCheckBox;
 
     @FXML
     private TableView<Table> timeTable;
@@ -45,10 +49,17 @@ public class TableController extends BaseController implements Initializable {
     private TableColumn<Table, String> status;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //her henter vi ting fra databaseHandler
-        TableDatabaseHandler tableDatabaseHandler = new TableDatabaseHandler();
-        ObservableList<Table> tableData = tableDatabaseHandler.gettingTable();
+        myCheckBox.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            updateTableData(newValue);
+        });
 
+        // indlæser data, så tabellen opdatere
+        updateTableData(myCheckBox.isSelected());
+    }
+
+    private void updateTableData(boolean isChecked) {
+        TableDatabaseHandler tableDatabaseHandler = new TableDatabaseHandler();
+        ObservableList<Table> tableData = isChecked ? tableDatabaseHandler.gettingOtherTable() : tableDatabaseHandler.gettingTable();
 
         System.out.println("Antal rækker hentet: " + tableData.size());
 
