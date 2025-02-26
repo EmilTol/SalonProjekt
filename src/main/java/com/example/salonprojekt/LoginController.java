@@ -18,7 +18,7 @@ public class LoginController extends BaseController {
     private TextField usernameField;
 
     @FXML
-    private TextField passwordField;
+    private PasswordField passwordField;
 
     @FXML
     private Label statusLabel;
@@ -41,8 +41,6 @@ public class LoginController extends BaseController {
 
                 usernameField.clear();
                 passwordField.clear();
-//                Parent newRoot = FXMLLoader.load(getClass().getResource("salon2.fxml"));
-//                usernameField.getScene().setRoot(newRoot);
 
             } catch (IOException e) {
                 e.printStackTrace();
