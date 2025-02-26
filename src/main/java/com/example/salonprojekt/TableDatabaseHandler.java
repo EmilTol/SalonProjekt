@@ -105,4 +105,27 @@ public class TableDatabaseHandler {
         }
         return list;
     }
+    public void updateAppointmentStatus(String customerName, String customerPhone, LocalDateTime appointmentDatetime, String employeeName, String newStatus) {
+        String query = "UPDATE Appointment SET status = ? WHERE customer_name = ? AND customer_phone = ? AND appointment_datetime = ? AND employee_id = (SELECT id FROM Employee WHERE full_name = ?)";
+
+        try (Connection conn = dc.getconnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, newStatus);
+            stmt.setString(2, customerName);
+            stmt.setString(3, customerPhone);
+            stmt.setTimestamp(4, Timestamp.valueOf(appointmentDatetime));
+            stmt.setString(5, employeeName);
+
+            int rowsUpdated = stmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Opdatering lykkedes for aftale: " + customerName + " på " + appointmentDatetime);
+            } else {
+                System.out.println("Ingen rækker blev opdateret. Tjek om data er korrekt!");
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Fejl ved opdatering: " + e.getMessage());
+        }
+    }
 }

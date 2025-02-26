@@ -34,7 +34,7 @@
             <Font name="Arial Rounded MT Bold" size="13.0" />
          </font>
       </Button>
-      <Button layoutX="454.0" layoutY="409.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="113.0" text="Aflys bestilling">
+      <Button layoutX="454.0" layoutY="409.0" mnemonicParsing="false" onAction="#handleCancelAppointment" prefHeight="30.0" prefWidth="113.0" text="Aflys bestilling">
          <font>
             <Font name="Arial Rounded MT Bold" size="13.0" />
          </font>
@@ -49,7 +49,7 @@
             <Font name="Arial Rounded MT Bold" size="12.0" />
          </font>
       </CheckBox>
-      <Button layoutX="325.0" layoutY="409.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Afslut bestilling">
+      <Button layoutX="325.0" layoutY="409.0" mnemonicParsing="false" onAction="#handleCloseAppointment" prefHeight="30.0" prefWidth="120.0" text="Afslut bestilling">
          <font>
             <Font name="Arial Rounded MT Bold" size="13.0" />
          </font>

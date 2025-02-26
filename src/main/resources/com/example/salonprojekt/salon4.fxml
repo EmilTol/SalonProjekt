@@ -8,54 +8,54 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.salonprojekt.EditController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.salonprojekt.EditController">
    <children>
-      <Label layoutX="143.0" layoutY="56.0" text="Rediger tidsbestilling">
+      <Label layoutX="18.0" layoutY="57.0" text="Rediger tidsbestilling">
          <font>
             <Font name="Arial Rounded MT Bold" size="36.0" />
          </font>
       </Label>
-      <DatePicker layoutX="256.0" layoutY="322.0" prefHeight="30.0" prefWidth="150.0" />
-      <TextField layoutX="55.0" layoutY="167.0" prefHeight="30.0" prefWidth="150.0" />
-      <TextField layoutX="255.0" layoutY="167.0" prefHeight="30.0" prefWidth="150.0" />
-      <ComboBox layoutX="54.0" layoutY="250.0" prefHeight="30.0" prefWidth="150.0" />
-      <ComboBox layoutX="55.0" layoutY="322.0" prefHeight="30.0" prefWidth="150.0" />
-      <Label layoutX="90.0" layoutY="145.0" text="Kunde navn">
+      <DatePicker layoutX="13.0" layoutY="309.0" prefHeight="20.0" prefWidth="170.0" />
+      <TextField layoutX="13.0" layoutY="138.0" prefHeight="20.0" prefWidth="170.0" />
+      <TextField layoutX="13.0" layoutY="191.0" prefHeight="20.0" prefWidth="170.0" />
+      <ComboBox layoutX="240.0" layoutY="138.0" prefHeight="20.0" prefWidth="170.0" />
+      <ComboBox layoutX="240.0" layoutY="309.0" prefHeight="20.0" prefWidth="170.0" />
+      <Label layoutX="18.0" layoutY="119.0" text="Kunde navn">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="289.0" layoutY="145.0" text="Kunde mobil">
+      <Label layoutX="15.0" layoutY="173.0" text="Kunde mobil">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="520.0" layoutY="145.0" text="Køn">
+      <Label layoutX="14.0" layoutY="228.0" text="Køn">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="91.0" layoutY="228.0" text="Behandling">
+      <Label layoutX="242.0" layoutY="119.0" text="Behandling">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="316.0" layoutY="228.0" text="Pris">
+      <Label layoutX="242.0" layoutY="173.0" text="Pris">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="110.0" layoutY="300.0" text="Frisør">
+      <Label layoutX="247.0" layoutY="291.0" text="Frisør">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="316.0" layoutY="300.0" text="Dato">
+      <Label layoutX="12.0" layoutY="291.0" text="Dato">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <Button layoutX="252.0" layoutY="381.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" text="Bekræft ændringer">
+      <Button layoutX="509.0" layoutY="289.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" text="Bekræft ændringer">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
@@ -65,25 +65,26 @@
             <Font name="Arial Rounded MT Bold" size="13.0" />
          </font>
       </Button>
-      <TextField layoutX="254.0" layoutY="250.0" prefHeight="30.0" prefWidth="150.0" />
-      <Label layoutX="481.0" layoutY="228.0" text="Behandlings tid">
+      <TextField layoutX="240.0" layoutY="191.0" prefHeight="20.0" prefWidth="170.0" />
+      <Label layoutX="242.0" layoutY="228.0" text="Behandlings tid">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <ComboBox layoutX="454.0" layoutY="167.0" prefHeight="30.0" prefWidth="150.0" />
-      <TextField layoutX="454.0" layoutY="250.0" prefHeight="30.0" prefWidth="150.0" />
-      <TextField layoutX="454.0" layoutY="390.0" prefHeight="30.0" prefWidth="150.0" />
-      <TextField layoutX="454.0" layoutY="322.0" prefHeight="30.0" prefWidth="150.0" />
-      <Label layoutX="492.0" layoutY="300.0" text="Ekstra pris">
+      <ComboBox layoutX="13.0" layoutY="250.0" prefHeight="20.0" prefWidth="170.0" />
+      <TextField layoutX="240.0" layoutY="250.0" prefHeight="20.0" prefWidth="170.0" />
+      <TextField layoutX="504.0" layoutY="237.0" prefHeight="25.0" prefWidth="170.0" />
+      <TextField layoutX="505.0" layoutY="160.0" prefHeight="25.0" prefWidth="170.0" />
+      <Label layoutX="553.0" layoutY="142.0" text="Ekstra pris">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="496.0" layoutY="372.0" text="Ekstra tid">
+      <Label layoutX="557.0" layoutY="219.0" text="Ekstra tid">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
+      <TextField layoutX="-10.0" layoutY="374.0" prefHeight="92.0" prefWidth="791.0" />
    </children>
 </AnchorPane>
