@@ -4,14 +4,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.salonprojekt.LoginController">   <children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.salonprojekt.LoginController">   <children>
       <Label layoutX="113.0" layoutY="101.0" text="Hårmoni’ka Tidsbestilling">
          <font>
             <Font name="Arial Rounded MT Bold" size="36.0" />
          </font>
       </Label>
       <TextField fx:id="usernameField" layoutX="246.0" layoutY="192.0" prefHeight="35.0" prefWidth="170.0" />
-      <TextField fx:id="passwordField" layoutX="246.0" layoutY="267.0" prefHeight="35.0" prefWidth="170.0" />
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="247.0" layoutY="172.0" prefHeight="18.0" prefWidth="170.0" text="Brugernavn">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
@@ -27,5 +26,6 @@
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Button>
+      <PasswordField fx:id="passwordField" layoutX="245.0" layoutY="267.0" prefHeight="35.0" prefWidth="170.0" />
    </children>
 </AnchorPane>
