@@ -20,7 +20,7 @@ public class HelloApplication extends Application {
         sceneManager.addScene("login","salon1.fxml",660,440);
         sceneManager.addScene("table","salon2.fxml",770,470);
         sceneManager.addScene("create","salon3.fxml",770,470);
-        sceneManager.addScene("edit","salon4.fxml",770,470);
+        sceneManager.addScene("edit","salon4.fxml",770,400);
 
         sceneManager.switchTo("login");
 
