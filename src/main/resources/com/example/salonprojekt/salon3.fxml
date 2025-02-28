@@ -11,11 +11,11 @@
             <Font name="Arial Rounded MT Bold" size="36.0" />
          </font>
       </Label>
-      <DatePicker layoutX="256.0" layoutY="322.0" prefHeight="30.0" prefWidth="150.0" />
-      <TextField layoutX="55.0" layoutY="167.0" prefHeight="30.0" prefWidth="150.0" />
-      <TextField layoutX="255.0" layoutY="167.0" prefHeight="30.0" prefWidth="150.0" />
-      <ComboBox layoutX="54.0" layoutY="250.0" prefHeight="30.0" prefWidth="150.0" />
-      <ComboBox layoutX="55.0" layoutY="322.0" prefHeight="30.0" prefWidth="150.0" />
+      <DatePicker fx:id="appointmentDatePicker" layoutX="256.0" layoutY="322.0" prefHeight="30.0" prefWidth="150.0" />
+      <TextField fx:id="customerNameField" layoutX="55.0" layoutY="167.0" prefHeight="30.0" prefWidth="150.0" />
+      <TextField fx:id="customerPhoneField" layoutX="255.0" layoutY="167.0" prefHeight="30.0" prefWidth="150.0" />
+      <ComboBox fx:id="treatmentComboBox" layoutX="54.0" layoutY="250.0" prefHeight="30.0" prefWidth="150.0" />
+      <ComboBox fx:id="employeeComboBox" layoutX="55.0" layoutY="322.0" prefHeight="30.0" prefWidth="150.0" />
       <Label layoutX="90.0" layoutY="145.0" text="Kunde navn">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
@@ -51,7 +51,7 @@
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <Button layoutX="270.0" layoutY="390.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="124.0" text="Opret bestilling">
+      <Button layoutX="270.0" layoutY="390.0" mnemonicParsing="false" onAction="#handleCreateAppointment" prefHeight="30.0" prefWidth="124.0" text="Opret bestilling">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
@@ -61,16 +61,16 @@
             <Font name="Arial Rounded MT Bold" size="13.0" />
          </font>
       </Button>
-      <TextField layoutX="254.0" layoutY="250.0" prefHeight="30.0" prefWidth="150.0" />
+      <TextField fx:id="basePriceField" layoutX="254.0" layoutY="250.0" prefHeight="30.0" prefWidth="150.0" />
       <Label layoutX="481.0" layoutY="228.0" text="Behandlings tid">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <ComboBox layoutX="454.0" layoutY="167.0" prefHeight="30.0" prefWidth="150.0" />
-      <TextField layoutX="454.0" layoutY="250.0" prefHeight="30.0" prefWidth="150.0" />
-      <TextField layoutX="454.0" layoutY="390.0" prefHeight="30.0" prefWidth="150.0" />
-      <TextField layoutX="454.0" layoutY="322.0" prefHeight="30.0" prefWidth="150.0" />
+      <ComboBox fx:id="genderComboBox" layoutX="454.0" layoutY="167.0" prefHeight="30.0" prefWidth="150.0" />
+      <TextField fx:id="appointmentTimeField" layoutX="454.0" layoutY="250.0" prefHeight="30.0" prefWidth="150.0" />
+      <TextField fx:id="extraTimeField" layoutX="454.0" layoutY="390.0" prefHeight="30.0" prefWidth="150.0" />
+      <TextField fx:id="extraCostField" layoutX="454.0" layoutY="322.0" prefHeight="30.0" prefWidth="150.0" />
       <Label layoutX="492.0" layoutY="300.0" text="Ekstra pris">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />

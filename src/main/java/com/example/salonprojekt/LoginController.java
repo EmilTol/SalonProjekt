@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class LoginController extends BaseController {
     private LoginDatabaseHandler loginDatabaseHandler = new LoginDatabaseHandler();
@@ -57,5 +59,10 @@ public class LoginController extends BaseController {
             alert.setContentText("Forkert brugernavn eller kode");
             alert.showAndWait();
         }
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }
