@@ -80,7 +80,7 @@ public class CreateController extends BaseController implements Initializable {
         LocalDate appointmentDate = appointmentDatePicker.getValue();
         String appointmentTime = appointmentTimeField.getText().trim();
 
-        if(customerName.isEmpty() || customerPhone.isEmpty() || customerGender == null ||
+        if (customerName.isEmpty() || customerPhone.isEmpty() || customerGender == null ||
                 treatmentName == null || employeeName == null || appointmentDate == null || appointmentTime.isEmpty()) {
             showAlert("Input Error", "Alle felter skal udfyldes");
             return;
@@ -101,7 +101,7 @@ public class CreateController extends BaseController implements Initializable {
             try {
                 extraCost = Double.parseDouble(extraCostField.getText().trim());
             } catch (NumberFormatException e) {
-                showAlert("Input Error", "Ekstra pris skal være et tal (fx 25.50)");
+                showAlert("Input Error", "Ekstra pris skal være et tal");
                 return;
             }
         }
@@ -109,22 +109,25 @@ public class CreateController extends BaseController implements Initializable {
             try {
                 extraTime = Integer.parseInt(extraTimeField.getText().trim());
             } catch (NumberFormatException e) {
-                showAlert("Input Error", "Ekstra tid skal være et heltal (fx 15)");
+                showAlert("Input Error", "Ekstra tid skal være et heltal");
                 return;
             }
         }
 
         int treatmentId = createDatabaseHandler.getTreatmentIdByName(treatmentName);
         int employeeId = createDatabaseHandler.getEmployeeIdByName(employeeName);
-        if (treatmentId == -1 || employeeId == -1) {
-            showAlert("Data Error", "Kunne ikke finde behandling eller medarbejder");
+        int treatmentDuration = createDatabaseHandler.getTreatmentDurationById(treatmentId);
+
+        boolean isAvailable = createDatabaseHandler.isTimeSlotAvailable(employeeId, appointmentDateTime, treatmentDuration + extraTime);
+        if (!isAvailable) {
+            showAlert("Tid kke tilgængelt", "Tid ikke tilgæng");
             return;
         }
 
         Create appointment = new Create(customerName, customerPhone, customerGender, treatmentId, appointmentDateTime, employeeId, "open", extraTime, extraCost);
 
         boolean success = createDatabaseHandler.insertAppointment(appointment);
-        if(success) {
+        if (success) {
             showAlert("Success", "Aftalen er oprettet");
             clearFields();
             try {
