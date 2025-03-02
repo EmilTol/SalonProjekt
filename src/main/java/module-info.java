@@ -4,7 +4,6 @@ module com.example.salonprojekt {
     requires java.sql;
     requires java.desktop;
 
-
     opens com.example.salonprojekt to javafx.fxml;
     exports com.example.salonprojekt;
 }

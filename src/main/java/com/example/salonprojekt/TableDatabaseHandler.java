@@ -20,7 +20,7 @@ public class TableDatabaseHandler {
                 "    a.customer_gender, \n" +
                 "    t.name AS treatment_name, \n" +
                 "    (t.standard_price + a.extra_cost) AS treatment_price,\n" +
-                "    t.standard_duration AS treatment_duration,\n" +
+                "    (t.standard_duration + a.extra_time) AS treatment_duration,\n" +
                 "    a.appointment_datetime, \n" +
                 "    e.full_name AS employee_name,\n" +
                 "    a.status\n" +
