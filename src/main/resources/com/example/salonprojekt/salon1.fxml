@@ -21,11 +21,11 @@
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <Button layoutX="286.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="26.0" prefWidth="90.0" text="LOGIN">
+      <PasswordField fx:id="passwordField" layoutX="245.0" layoutY="267.0" prefHeight="35.0" prefWidth="170.0" />
+      <Button defaultButton="true" layoutX="286.0" layoutY="332.0" mnemonicParsing="false" onAction="#handleLoginButtonAction" prefHeight="26.0" prefWidth="90.0" text="LOGIN">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Button>
-      <PasswordField fx:id="passwordField" layoutX="245.0" layoutY="267.0" prefHeight="35.0" prefWidth="170.0" />
    </children>
 </AnchorPane>

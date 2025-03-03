@@ -66,7 +66,7 @@ public class CreateDatabaseHandler {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 if (resultSet.next() && resultSet.getInt(1) > 0) {
-                    return false; // Der findes allerede en booking i det tidsrum
+                    return false;
                 }
             }
         } catch (SQLException e) {
