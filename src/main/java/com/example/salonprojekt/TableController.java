@@ -13,6 +13,7 @@ import javafx.scene.control.Alert.AlertType;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 
@@ -83,6 +84,7 @@ public class TableController extends BaseController implements Initializable {
 
     @FXML
     private void switchToCreate() throws IOException {
+
         if (sceneManager != null) {
             sceneManager.switchTo("create");
         } else {
@@ -91,8 +93,32 @@ public class TableController extends BaseController implements Initializable {
     }
     @FXML
     private void switchToEdit() throws IOException {
+        Table selectedRow = timeTable.getSelectionModel().getSelectedItem();
+        if (selectedRow == null) {
+            showAlert("Ingen række valgt", "Vælg en række og prøv igen");
+            return;
+        }
+
+        String tableName = selectedRow.getCustomer_name();
+        String tablePhone = selectedRow.getCustomerPhone();
+        String tableGender = selectedRow.getCustomerGender();
+        String tableTreatment = selectedRow.getTreatmentName();
+        LocalDateTime tableTime = selectedRow.getAppointmentDatetime();
+        String tableEmployee = selectedRow.getEmployeeName();
+        String tableStatus = selectedRow.getStatus();
+
+        //henter også lige status, bliver ikke sendt videre men bruges til et check
+        if (tableStatus.equals("cancelled") || tableStatus.equals("closed")) {
+            showAlert("Allerede lukket", "Du kan ikke ændre en allerede afsluttet bestilling");
+            return;
+        }
+
+        System.out.println(tableName + " received");
+        System.out.println(tableEmployee + " received");
+
         if (sceneManager != null) {
-            sceneManager.switchTo("edit");
+            // Skift til 'edit' scenen og send dataen med.
+            sceneManager.switchToWithData("edit", tableName, tablePhone, tableGender, tableTreatment, tableTime, tableEmployee);
         } else {
             System.out.println("sceneManager is not initialized!");
         }
@@ -100,6 +126,7 @@ public class TableController extends BaseController implements Initializable {
 
     @FXML
     private void switchToStart() throws IOException {
+
         if (sceneManager != null) {
             sceneManager.switchTo("login");
         } else {
@@ -120,7 +147,7 @@ public class TableController extends BaseController implements Initializable {
                     selectedAppointment.getEmployeeName(),
                     "cancelled"
             );
-            updateTableData(myCheckBox.isSelected()); // holder den stadig opdateret
+            updateTableData(myCheckBox.isSelected()); // holder den stadig opdateret.. tror måske man kan lave en timeTable.refresh();
         } else {
             showAlert("Ingen aftale valgt", "Vælg venligst en aftale først for at aflyse.");
         }

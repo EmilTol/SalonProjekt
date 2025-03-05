@@ -1,8 +1,5 @@
 package com.example.salonprojekt;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
 
 import java.time.LocalDateTime;
 

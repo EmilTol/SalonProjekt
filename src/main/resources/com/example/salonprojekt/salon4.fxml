@@ -11,9 +11,9 @@
             <Font name="Arial Rounded MT Bold" size="36.0" />
          </font>
       </Label>
-      <DatePicker layoutX="13.0" layoutY="309.0" prefHeight="20.0" prefWidth="170.0" />
-      <TextField layoutX="13.0" layoutY="138.0" prefHeight="20.0" prefWidth="170.0" />
-      <TextField layoutX="13.0" layoutY="191.0" prefHeight="20.0" prefWidth="170.0" />
+      <DatePicker fx:id="timePicker" layoutX="13.0" layoutY="309.0" prefHeight="20.0" prefWidth="170.0" />
+      <TextField fx:id="textfieldName" layoutX="13.0" layoutY="138.0" prefHeight="20.0" prefWidth="170.0" />
+      <TextField fx:id="textfieldPhone" layoutX="13.0" layoutY="191.0" prefHeight="20.0" prefWidth="170.0" />
       <ComboBox fx:id="treatmentBox" layoutX="240.0" layoutY="138.0" prefHeight="20.0" prefWidth="170.0" />
       <ComboBox fx:id="hairPeopleBox" layoutX="240.0" layoutY="309.0" prefHeight="20.0" prefWidth="170.0" />
       <Label layoutX="15.0" layoutY="119.0" text="Kunde navn">

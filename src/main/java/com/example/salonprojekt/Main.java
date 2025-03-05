@@ -22,11 +22,6 @@ public class Main extends Application {
 
         sceneManager.switchTo("login");
 
-//        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("salon1.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load(), 660, 440);
-//        stage.setTitle("goddag!");
-//        stage.setScene(scene);
-//        stage.show();
     }
 
     public static void main(String[] args) {
