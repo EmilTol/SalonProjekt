@@ -5,13 +5,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
 public class SceneManager  {
     //kan bruge Scenemanager til at kontrollere alle skift man har behov for
    private Stage stage;
+    private TableController tableController;
    private final Map<String, Scene> scenes = new HashMap<>();
     private final Map<String, Object> controllers = new HashMap<>();
 
@@ -48,12 +51,13 @@ public class SceneManager  {
            stage.setScene(scenes.get(sceneName));
            stage.show();
        }
+
        else {
            System.out.println("Scene " + sceneName + " findes ikke!");
        }
    }
 
-    public void switchToWithData(String sceneName, String name, String phone, String gender, String treatment, LocalDateTime time, String employee) throws IOException {
+    public void switchToWithData(String sceneName, String name, String phone, String gender, String treatment, LocalDate date, LocalTime time, String employee, double extraCost, int extraTime) throws IOException {
         if (scenes.containsKey(sceneName)) {
             Scene scene = scenes.get(sceneName);
 
@@ -62,7 +66,7 @@ public class SceneManager  {
 
             //Tjekekr lige om null, og så bruger vi methoden i editController
             if (editController != null) {
-                editController.setAppointment(name, phone, gender, treatment, time, employee);
+                editController.setAppointment(name, phone, gender, treatment, date, time, employee, extraCost, extraTime);
             }
 
             // Skift til scenen, dens arbejde

@@ -11,7 +11,7 @@
             <Font name="Arial Rounded MT Bold" size="36.0" />
          </font>
       </Label>
-      <DatePicker fx:id="timePicker" layoutX="13.0" layoutY="309.0" prefHeight="20.0" prefWidth="170.0" />
+      <DatePicker fx:id="datePicker" layoutX="13.0" layoutY="309.0" prefHeight="20.0" prefWidth="170.0" />
       <TextField fx:id="textfieldName" layoutX="13.0" layoutY="138.0" prefHeight="20.0" prefWidth="170.0" />
       <TextField fx:id="textfieldPhone" layoutX="13.0" layoutY="191.0" prefHeight="20.0" prefWidth="170.0" />
       <ComboBox fx:id="treatmentBox" layoutX="240.0" layoutY="138.0" prefHeight="20.0" prefWidth="170.0" />
@@ -51,7 +51,7 @@
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <Button layoutX="510.0" layoutY="289.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" text="Bekræft ændringer">
+      <Button layoutX="510.0" layoutY="289.0" mnemonicParsing="false" onAction="#updateAppointment" prefHeight="40.0" prefWidth="160.0" text="Bekræft ændringer">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
@@ -69,8 +69,8 @@
       </Label>
       <ComboBox fx:id="genderBox" layoutX="13.0" layoutY="250.0" prefHeight="20.0" prefWidth="170.0" />
       <TextField fx:id="duration" layoutX="240.0" layoutY="250.0" prefHeight="20.0" prefWidth="170.0" />
-      <TextField layoutX="505.0" layoutY="233.0" prefHeight="25.0" prefWidth="170.0" />
-      <TextField layoutX="505.0" layoutY="160.0" prefHeight="25.0" prefWidth="170.0" />
+      <TextField fx:id="fieldExtraTime" layoutX="505.0" layoutY="233.0" prefHeight="25.0" prefWidth="170.0" />
+      <TextField fx:id="fieldExtraPrice" layoutX="505.0" layoutY="160.0" prefHeight="25.0" prefWidth="170.0" />
       <Label layoutX="553.0" layoutY="137.0" text="Ekstra pris">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
@@ -81,5 +81,7 @@
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
+      <TextField fx:id="timePicker" layoutX="505.0" layoutY="100.0" prefWidth="170.0" />
+      <Label layoutX="505.0" layoutY="70.0" text="FUCKING LORT" />
    </children>
 </AnchorPane>

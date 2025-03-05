@@ -13,7 +13,10 @@ import javafx.scene.control.Alert.AlertType;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.zone.ZoneRulesProvider;
 import java.util.ResourceBundle;
 
 
@@ -103,9 +106,13 @@ public class TableController extends BaseController implements Initializable {
         String tablePhone = selectedRow.getCustomerPhone();
         String tableGender = selectedRow.getCustomerGender();
         String tableTreatment = selectedRow.getTreatmentName();
-        LocalDateTime tableTime = selectedRow.getAppointmentDatetime();
+        LocalDate tableDate = LocalDate.from(selectedRow.getAppointmentDatetime());
+        LocalTime tableTime = LocalTime.from(selectedRow.getAppointmentDatetime());
         String tableEmployee = selectedRow.getEmployeeName();
         String tableStatus = selectedRow.getStatus();
+
+        double extraCost = TableDatabaseHandler.getExtraCost(tablePhone, tableEmployee, selectedRow.getAppointmentDatetime());
+        int extraTime = TableDatabaseHandler.getExtraTime(tablePhone, tableEmployee, selectedRow.getAppointmentDatetime());
 
         //henter også lige status, bliver ikke sendt videre men bruges til et check
         if (tableStatus.equals("cancelled") || tableStatus.equals("closed")) {
@@ -118,7 +125,7 @@ public class TableController extends BaseController implements Initializable {
 
         if (sceneManager != null) {
             // Skift til 'edit' scenen og send dataen med.
-            sceneManager.switchToWithData("edit", tableName, tablePhone, tableGender, tableTreatment, tableTime, tableEmployee);
+            sceneManager.switchToWithData("edit", tableName, tablePhone, tableGender, tableTreatment, tableDate, tableTime, tableEmployee, extraCost, extraTime);
         } else {
             System.out.println("sceneManager is not initialized!");
         }
@@ -182,5 +189,5 @@ public class TableController extends BaseController implements Initializable {
         alert.showAndWait();
     }
 
-    }
+}
 

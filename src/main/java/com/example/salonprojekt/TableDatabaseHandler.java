@@ -47,7 +47,7 @@ public class TableDatabaseHandler {
                 String status = rs.getString("status");
 
                 Table table = new Table(customer_name, customerPhone, customerGender, treatmentName, treatmentPrice,
-                        treatmentDuration,appointmentDatetime, employeeName, status);
+                        treatmentDuration, appointmentDatetime, employeeName, status);
                 list.add(table);
             }
 
@@ -58,6 +58,7 @@ public class TableDatabaseHandler {
         }
         return list;
     }
+
     public ObservableList<Table> gettingOtherTable() {
         ObservableList<Table> list = FXCollections.observableArrayList();
 
@@ -94,7 +95,7 @@ public class TableDatabaseHandler {
                 String status = rs.getString("status");
 
                 Table table = new Table(customer_name, customerPhone, customerGender, treatmentName, treatmentPrice,
-                        treatmentDuration,appointmentDatetime, employeeName, status);
+                        treatmentDuration, appointmentDatetime, employeeName, status);
                 list.add(table);
             }
 
@@ -105,6 +106,7 @@ public class TableDatabaseHandler {
         }
         return list;
     }
+
     public void updateAppointmentStatus(String customerName, String customerPhone, LocalDateTime appointmentDatetime, String employeeName, String newStatus) {
         String query = "UPDATE Appointment SET status = ? WHERE customer_name = ? AND customer_phone = ? AND appointment_datetime = ? AND employee_id = (SELECT id FROM Employee WHERE full_name = ?)";
 
@@ -121,11 +123,54 @@ public class TableDatabaseHandler {
             if (rowsUpdated > 0) {
                 System.out.println("Opdatering lykkedes for aftale: " + customerName + " på " + appointmentDatetime);
             } else {
-                System.out.println("Ingen rækker blev opdateret. Tjek om data er korrekt!");
+                System.out.println("Ingen rækker blev opdateret. fuck");
             }
 
         } catch (SQLException e) {
             System.err.println("Fejl ved opdatering: " + e.getMessage());
         }
+
+    }
+
+    public static double getExtraCost(String customerPhone, String employeeName, LocalDateTime appointmentDatetime) {
+        double extraCost = 0.0;
+        String query = "SELECT extra_cost FROM Appointment WHERE customer_phone = ? AND employee_id = (SELECT id FROM Employee WHERE full_name = ?) AND appointment_datetime = ?";
+
+        try (Connection conn = DatabaseConnection.getconnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, customerPhone);
+            stmt.setString(2, employeeName);
+            stmt.setTimestamp(3, Timestamp.valueOf(appointmentDatetime));
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                extraCost = rs.getDouble("extra_cost");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return extraCost;
+    }
+
+    public static int getExtraTime(String customerPhone, String employeeName, LocalDateTime appointmentDatetime) {
+        int extraTime = 0;
+        String query = "SELECT extra_time FROM Appointment WHERE customer_phone = ? AND employee_id = (SELECT id FROM Employee WHERE full_name = ?) AND appointment_datetime = ?";
+
+        try (Connection conn = DatabaseConnection.getconnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, customerPhone);
+            stmt.setString(2, employeeName);
+            stmt.setTimestamp(3, Timestamp.valueOf(appointmentDatetime));
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                extraTime = rs.getInt("extra_time");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return extraTime;
     }
 }
