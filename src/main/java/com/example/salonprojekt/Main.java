@@ -17,8 +17,8 @@ public class Main extends Application {
         //hvis man skal skifte side skal man brug navnet f.eks. "login"
         sceneManager.addScene("login","salon1.fxml",660,440);
         sceneManager.addScene("table","salon2.fxml",770,470);
-        sceneManager.addScene("create","salon3.fxml",770,470);
-        sceneManager.addScene("edit","salon4.fxml",770,400);
+        sceneManager.addScene("create","salon3.fxml",770,390);
+        sceneManager.addScene("edit","salon4.fxml",770,390);
 
         sceneManager.switchTo("login");
 

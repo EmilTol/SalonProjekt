@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.salonprojekt.EditController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.salonprojekt.EditController">
    <children>
       <Label layoutX="18.0" layoutY="57.0" text="Rediger tidsbestilling">
          <font>
@@ -62,7 +62,7 @@
          </font>
       </Button>
       <TextField fx:id="price" layoutX="240.0" layoutY="191.0" prefHeight="20.0" prefWidth="170.0" />
-      <Label layoutX="242.0" layoutY="228.0" text="Behandlings tid">
+      <Label layoutX="242.0" layoutY="228.0" text="Tid">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
@@ -82,6 +82,9 @@
          </font>
       </Label>
       <TextField fx:id="timePicker" layoutX="505.0" layoutY="100.0" prefWidth="170.0" />
-      <Label layoutX="505.0" layoutY="70.0" text="FUCKING LORT" />
+      <Label layoutX="536.0" layoutY="75.0" text="Behandlings tid">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font></Label>
    </children>
 </AnchorPane>
