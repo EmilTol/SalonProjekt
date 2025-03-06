@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 import java.sql.*;
 import java.time.LocalDateTime;
 
-public class TableDatabaseHandler {
+public class AppointmentDatabaseHandler {
 
 
     private DatabaseConnection dc;

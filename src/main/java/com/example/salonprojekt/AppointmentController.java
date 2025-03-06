@@ -64,9 +64,9 @@ public class AppointmentController extends BaseController implements Initializab
     }
 
     private void updateTableData(boolean isChecked) {
-        TableDatabaseHandler tableDatabaseHandler = new TableDatabaseHandler();
+        AppointmentDatabaseHandler appointmentDatabaseHandler = new AppointmentDatabaseHandler();
         //den her linje ligger gettingOtherTable og gettingTable hvilken en der køre er styret af CheckBox
-        ObservableList<Appointment> appointmentData = isChecked ? tableDatabaseHandler.gettingOtherTable() : tableDatabaseHandler.gettingTable();
+        ObservableList<Appointment> appointmentData = isChecked ? appointmentDatabaseHandler.gettingOtherTable() : appointmentDatabaseHandler.gettingTable();
 
         System.out.println("Antal rækker hentet: " + appointmentData.size());
 
@@ -109,8 +109,8 @@ public class AppointmentController extends BaseController implements Initializab
         String tableEmployee = selectedRow.getEmployeeName();
         String tableStatus = selectedRow.getStatus();
 
-        double extraCost = TableDatabaseHandler.getExtraCost(tablePhone, tableEmployee, selectedRow.getAppointmentDatetime());
-        int extraTime = TableDatabaseHandler.getExtraTime(tablePhone, tableEmployee, selectedRow.getAppointmentDatetime());
+        double extraCost = AppointmentDatabaseHandler.getExtraCost(tablePhone, tableEmployee, selectedRow.getAppointmentDatetime());
+        int extraTime = AppointmentDatabaseHandler.getExtraTime(tablePhone, tableEmployee, selectedRow.getAppointmentDatetime());
 
         //henter også lige status, bliver ikke sendt videre men bruges til et check
         if (tableStatus.equals("cancelled") || tableStatus.equals("closed")) {
@@ -143,7 +143,7 @@ public class AppointmentController extends BaseController implements Initializab
     private void handleCancelAppointment() {
         Appointment selectedAppointment = timeTable.getSelectionModel().getSelectedItem();
         if (selectedAppointment != null) {
-            TableDatabaseHandler dbHandler = new TableDatabaseHandler();
+            AppointmentDatabaseHandler dbHandler = new AppointmentDatabaseHandler();
             //de her 4 bruges til at opdaterer status på den korrekte, for at undgå Id
             dbHandler.updateAppointmentStatus(
                     selectedAppointment.getCustomer_name(),
@@ -162,7 +162,7 @@ public class AppointmentController extends BaseController implements Initializab
     private void handleCloseAppointment() {
         Appointment selectedAppointment = timeTable.getSelectionModel().getSelectedItem();
         if (selectedAppointment != null) {
-            TableDatabaseHandler dbHandler = new TableDatabaseHandler();
+            AppointmentDatabaseHandler dbHandler = new AppointmentDatabaseHandler();
             dbHandler.updateAppointmentStatus(
                     selectedAppointment.getCustomer_name(),
                     selectedAppointment.getCustomerPhone(),
