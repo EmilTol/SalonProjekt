@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +13,7 @@ import java.util.Map;
 public class SceneManager  {
     //kan bruge Scenemanager til at kontrollere alle skift man har behov for
    private Stage stage;
-    private TableController tableController;
+    private AppointmentController appointmentController;
    private final Map<String, Scene> scenes = new HashMap<>();
     private final Map<String, Object> controllers = new HashMap<>();
 

@@ -3,7 +3,7 @@ package com.example.salonprojekt;
 
 import java.time.LocalDateTime;
 
-public class Table {
+public class Appointment {
     private String customer_name;
     private String customerPhone;
     private String customerGender;
@@ -16,8 +16,8 @@ public class Table {
     private String status;
 
 
-    public Table(String customer_name, String customerPhone, String customerGender, String treatmentName, double treatmentPrice,
-                 int treatmentDuration, LocalDateTime appointmentDatetime, String employeeName, String status) {
+    public Appointment(String customer_name, String customerPhone, String customerGender, String treatmentName, double treatmentPrice,
+                       int treatmentDuration, LocalDateTime appointmentDatetime, String employeeName, String status) {
         this.customer_name = customer_name;
         this.customerPhone = customerPhone;
         this.customerGender = customerGender;

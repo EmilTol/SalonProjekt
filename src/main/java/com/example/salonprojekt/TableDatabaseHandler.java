@@ -11,8 +11,8 @@ public class TableDatabaseHandler {
 
     private DatabaseConnection dc;
 
-    public ObservableList<Table> gettingTable() {
-        ObservableList<Table> list = FXCollections.observableArrayList();
+    public ObservableList<Appointment> gettingTable() {
+        ObservableList<Appointment> list = FXCollections.observableArrayList();
 
         String query = "SELECT \n" +
                 "    a.customer_name, \n" +
@@ -46,9 +46,9 @@ public class TableDatabaseHandler {
                 String employeeName = rs.getString("employee_name");
                 String status = rs.getString("status");
 
-                Table table = new Table(customer_name, customerPhone, customerGender, treatmentName, treatmentPrice,
+                Appointment appointment = new Appointment(customer_name, customerPhone, customerGender, treatmentName, treatmentPrice,
                         treatmentDuration, appointmentDatetime, employeeName, status);
-                list.add(table);
+                list.add(appointment);
             }
 
 
@@ -59,8 +59,8 @@ public class TableDatabaseHandler {
         return list;
     }
 
-    public ObservableList<Table> gettingOtherTable() {
-        ObservableList<Table> list = FXCollections.observableArrayList();
+    public ObservableList<Appointment> gettingOtherTable() {
+        ObservableList<Appointment> list = FXCollections.observableArrayList();
 
         String query = "SELECT \n" +
                 "    a.customer_name, \n" +
@@ -94,9 +94,9 @@ public class TableDatabaseHandler {
                 String employeeName = rs.getString("employee_name");
                 String status = rs.getString("status");
 
-                Table table = new Table(customer_name, customerPhone, customerGender, treatmentName, treatmentPrice,
+                Appointment appointment = new Appointment(customer_name, customerPhone, customerGender, treatmentName, treatmentPrice,
                         treatmentDuration, appointmentDatetime, employeeName, status);
-                list.add(table);
+                list.add(appointment);
             }
 
 

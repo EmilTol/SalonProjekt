@@ -14,46 +14,44 @@ import javafx.scene.control.Alert.AlertType;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.zone.ZoneRulesProvider;
 import java.util.ResourceBundle;
 
 
-public class TableController extends BaseController implements Initializable {
+public class AppointmentController extends BaseController implements Initializable {
 
     @FXML
     private CheckBox myCheckBox;
 
     @FXML
-    private TableView<Table> timeTable;
+    private TableView<Appointment> timeTable;
 
     @FXML
-    private TableColumn<Table, String> name;
+    private TableColumn<Appointment, String> name;
 
     @FXML
-    private TableColumn<Table, String> number;
+    private TableColumn<Appointment, String> number;
 
     @FXML
-    private TableColumn<Table, String> gender;
+    private TableColumn<Appointment, String> gender;
 
     @FXML
-    private TableColumn<Table, String> treatment;
+    private TableColumn<Appointment, String> treatment;
 
     @FXML
-    private TableColumn<Table, Double> price;
+    private TableColumn<Appointment, Double> price;
 
     @FXML
-    private TableColumn<Table, Integer> duration;
+    private TableColumn<Appointment, Integer> duration;
 
     @FXML
-    private TableColumn<Table, Integer> time;
+    private TableColumn<Appointment, Integer> time;
 
     @FXML
-    private TableColumn<Table, String> barbar;
+    private TableColumn<Appointment, String> barbar;
 
     @FXML
-    private TableColumn<Table, String> status;
+    private TableColumn<Appointment, String> status;
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //en listerner holder vist øje med når der sker ændringer. holder TableView opdateret
@@ -68,9 +66,9 @@ public class TableController extends BaseController implements Initializable {
     private void updateTableData(boolean isChecked) {
         TableDatabaseHandler tableDatabaseHandler = new TableDatabaseHandler();
         //den her linje ligger gettingOtherTable og gettingTable hvilken en der køre er styret af CheckBox
-        ObservableList<Table> tableData = isChecked ? tableDatabaseHandler.gettingOtherTable() : tableDatabaseHandler.gettingTable();
+        ObservableList<Appointment> appointmentData = isChecked ? tableDatabaseHandler.gettingOtherTable() : tableDatabaseHandler.gettingTable();
 
-        System.out.println("Antal rækker hentet: " + tableData.size());
+        System.out.println("Antal rækker hentet: " + appointmentData.size());
 
         name.setCellValueFactory(new PropertyValueFactory<>("customer_name"));
         number.setCellValueFactory(new PropertyValueFactory<>("customerPhone"));
@@ -82,7 +80,7 @@ public class TableController extends BaseController implements Initializable {
         barbar.setCellValueFactory(new PropertyValueFactory<>("employeeName"));
         status.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        timeTable.setItems(tableData);
+        timeTable.setItems(appointmentData);
     }
 
     @FXML
@@ -96,7 +94,7 @@ public class TableController extends BaseController implements Initializable {
     }
     @FXML
     private void switchToEdit() throws IOException {
-        Table selectedRow = timeTable.getSelectionModel().getSelectedItem();
+        Appointment selectedRow = timeTable.getSelectionModel().getSelectedItem();
         if (selectedRow == null) {
             showAlert("Ingen række valgt", "Vælg en række og prøv igen");
             return;
@@ -143,7 +141,7 @@ public class TableController extends BaseController implements Initializable {
 
     @FXML
     private void handleCancelAppointment() {
-        Table selectedAppointment = timeTable.getSelectionModel().getSelectedItem();
+        Appointment selectedAppointment = timeTable.getSelectionModel().getSelectedItem();
         if (selectedAppointment != null) {
             TableDatabaseHandler dbHandler = new TableDatabaseHandler();
             //de her 4 bruges til at opdaterer status på den korrekte, for at undgå Id
@@ -162,7 +160,7 @@ public class TableController extends BaseController implements Initializable {
 
     @FXML
     private void handleCloseAppointment() {
-        Table selectedAppointment = timeTable.getSelectionModel().getSelectedItem();
+        Appointment selectedAppointment = timeTable.getSelectionModel().getSelectedItem();
         if (selectedAppointment != null) {
             TableDatabaseHandler dbHandler = new TableDatabaseHandler();
             dbHandler.updateAppointmentStatus(
