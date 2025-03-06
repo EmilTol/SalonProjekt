@@ -4,54 +4,54 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="660.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.salonprojekt.CreateController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="390.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.salonprojekt.CreateController">
    <children>
-      <Label layoutX="74.0" layoutY="55.0" text="Oprettelse af ny tidsbestilling">
+      <Label layoutX="18.0" layoutY="57.0" text="Oprettelse af ny tidsbestilling">
          <font>
             <Font name="Arial Rounded MT Bold" size="36.0" />
          </font>
       </Label>
-      <DatePicker fx:id="appointmentDatePicker" layoutX="256.0" layoutY="322.0" prefHeight="30.0" prefWidth="150.0" />
-      <TextField fx:id="customerNameField" layoutX="55.0" layoutY="167.0" prefHeight="30.0" prefWidth="150.0" />
-      <TextField fx:id="customerPhoneField" layoutX="255.0" layoutY="167.0" prefHeight="30.0" prefWidth="150.0" />
-      <ComboBox fx:id="treatmentComboBox" layoutX="54.0" layoutY="250.0" prefHeight="30.0" prefWidth="150.0" />
-      <ComboBox fx:id="employeeComboBox" layoutX="55.0" layoutY="322.0" prefHeight="30.0" prefWidth="150.0" />
-      <Label layoutX="90.0" layoutY="145.0" text="Kunde navn">
+      <DatePicker fx:id="appointmentDatePicker" layoutX="13.0" layoutY="309.0" prefHeight="20.0" prefWidth="170.0" />
+      <TextField fx:id="customerNameField" layoutX="13.0" layoutY="138.0" prefHeight="20.0" prefWidth="170.0" />
+      <TextField fx:id="customerPhoneField" layoutX="13.0" layoutY="191.0" prefHeight="20.0" prefWidth="170.0" />
+      <ComboBox fx:id="treatmentComboBox" layoutX="240.0" layoutY="138.0" prefHeight="20.0" prefWidth="170.0" />
+      <ComboBox fx:id="employeeComboBox" layoutX="240.0" layoutY="309.0" prefHeight="20.0" prefWidth="170.0" />
+      <Label layoutX="15.0" layoutY="119.0" text="Kunde navn">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="289.0" layoutY="145.0" text="Kunde mobil">
+      <Label layoutX="15.0" layoutY="173.0" text="Kunde mobil">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="520.0" layoutY="145.0" text="Køn">
+      <Label layoutX="14.0" layoutY="228.0" text="Køn">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="91.0" layoutY="228.0" text="Behandling">
+      <Label layoutX="242.0" layoutY="119.0" text="Behandling">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="316.0" layoutY="228.0" text="Pris">
+      <Label layoutX="242.0" layoutY="173.0" text="Pris">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="110.0" layoutY="300.0" text="Frisør">
+      <Label layoutX="242.0" layoutY="290.0" text="Frisør">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="316.0" layoutY="300.0" text="Dato">
+      <Label layoutX="14.0" layoutY="290.0" prefHeight="18.0" prefWidth="41.0" text="Dato">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <Button layoutX="270.0" layoutY="390.0" mnemonicParsing="false" onAction="#handleCreateAppointment" prefHeight="30.0" prefWidth="124.0" text="Opret bestilling">
+      <Button layoutX="510.0" layoutY="289.0" mnemonicParsing="false" onAction="#handleCreateAppointment" prefHeight="40.0" prefWidth="160.0" text="Opret bestilling">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
@@ -61,22 +61,22 @@
             <Font name="Arial Rounded MT Bold" size="13.0" />
          </font>
       </Button>
-      <TextField fx:id="basePriceField" layoutX="254.0" layoutY="250.0" prefHeight="30.0" prefWidth="150.0" />
-      <Label layoutX="481.0" layoutY="228.0" text="Behandlings tid">
+      <TextField fx:id="basePriceField" layoutX="240.0" layoutY="191.0" prefHeight="20.0" prefWidth="170.0" />
+      <Label layoutX="242.0" layoutY="228.0" text="Behandlings tid">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <ComboBox fx:id="genderComboBox" layoutX="454.0" layoutY="167.0" prefHeight="30.0" prefWidth="150.0" />
-      <TextField fx:id="appointmentTimeField" layoutX="454.0" layoutY="250.0" prefHeight="30.0" prefWidth="150.0" />
-      <TextField fx:id="extraTimeField" layoutX="454.0" layoutY="390.0" prefHeight="30.0" prefWidth="150.0" />
-      <TextField fx:id="extraCostField" layoutX="454.0" layoutY="322.0" prefHeight="30.0" prefWidth="150.0" />
-      <Label layoutX="492.0" layoutY="300.0" text="Ekstra pris">
+      <ComboBox fx:id="genderComboBox" layoutX="13.0" layoutY="250.0" prefHeight="20.0" prefWidth="170.0" />
+      <TextField fx:id="appointmentTimeField" layoutX="240.0" layoutY="250.0" prefHeight="20.0" prefWidth="170.0" />
+      <TextField fx:id="extraTimeField" layoutX="505.0" layoutY="233.0" prefHeight="25.0" prefWidth="170.0" />
+      <TextField fx:id="extraCostField" layoutX="505.0" layoutY="160.0" prefHeight="25.0" prefWidth="170.0" />
+      <Label layoutX="553.0" layoutY="137.0" text="Ekstra pris">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="496.0" layoutY="372.0" text="Ekstra tid">
+      <Label layoutX="557.0" layoutY="208.0" text="Ekstra tid">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
