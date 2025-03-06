@@ -13,25 +13,25 @@ import java.time.LocalDateTime;
 public class CreateRepository {
 
     public boolean insertAppointment(Create appointment) {
-        int treatmentDuration = getTreatmentDurationById(appointment.getTreatmentId());
-        if (treatmentDuration == -1) {
+        int treatmentDuration = getTreatmentDurationById(appointment.getTreatmentId()); //Henter behandlingens duration fra db
+        if (treatmentDuration == -1) { // Vi bruger -1 da det indikere at den ikke kunne finde en gyldig varighed
             System.out.println("Behandlingens varighed kunne ikke findes.");
-            return false;
+            return false; //Returnere false da der var en fejl.
         }
 
-        // Tjek om tiden er ledig for denne frisør
+        // Tjek om tiden er ledig for denne frisør - dårlig implementering i know.
         boolean isAvailable = isTimeSlotAvailable(appointment.getEmployeeId(), appointment.getAppointmentDatetime(), treatmentDuration + appointment.getExtraTime());
-        if (!isAvailable) {
+        if (!isAvailable) { //Hvis tiden ikke er ledig får vi false
             System.out.println("Tidsrummet er allerede optaget for denne frisør.");
             return false;
         }
 
         String query = "INSERT INTO Appointment (customer_name, customer_phone, customer_gender, treatment_id, " +
                 "appointment_datetime, employee_id, status, extra_time, extra_cost) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"; // Vi in indsætter her vores nye aftale i db
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, appointment.getCustomerName());
+            preparedStatement.setString(1, appointment.getCustomerName()); // Indsætter værdier i diverse felter i vores tabel
             preparedStatement.setString(2, appointment.getCustomerPhone());
             preparedStatement.setString(3, appointment.getCustomerGender());
             preparedStatement.setInt(4, appointment.getTreatmentId());
@@ -42,14 +42,14 @@ public class CreateRepository {
             preparedStatement.setDouble(9, appointment.getExtraCost());
 
             int rowsInserted = preparedStatement.executeUpdate();
-            return rowsInserted > 0;
+            return rowsInserted > 0; // hvis vi får mindst 1 row indsat får vi true, altså der blev indsat noget
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); //Hvis fejl printer vi stacktrace og får false
             return false;
         }
     }
 
-    public boolean isTimeSlotAvailable(int employeeId, LocalDateTime newAppointmentStart, int duration) {
+    public boolean isTimeSlotAvailable(int employeeId, LocalDateTime newAppointmentStart, int duration) { //Her tjekker vi om der er en aftale som overlapper med vores nye ønskede tid - dårlig :(
         String query = "SELECT COUNT(*) FROM Appointment " +
                 "WHERE employee_id = ? " +
                 "AND status = 'open' " +
@@ -65,7 +65,7 @@ public class CreateRepository {
             preparedStatement.setTimestamp(4, Timestamp.valueOf(newAppointmentStart));
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next() && resultSet.getInt(1) > 0) {
+                if (resultSet.next() && resultSet.getInt(1) > 0) { // Hvis () er højere end 0, så er der en tid i det tidsrum
                     return false;
                 }
             }
@@ -75,7 +75,7 @@ public class CreateRepository {
         return true;
     }
 
-    public int getTreatmentDurationById(int treatmentId) {
+    public int getTreatmentDurationById(int treatmentId) { // Henter standard duration basseret på id
         String query = "SELECT standard_duration FROM Treatment WHERE id = ?";
 
         try (Connection connection = DatabaseConnection.getConnection();
@@ -84,17 +84,17 @@ public class CreateRepository {
             preparedStatement.setInt(1, treatmentId);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (resultSet.next()) {
+                if (resultSet.next()) { // Hvis den findes sender vi standard duration
                     return resultSet.getInt("standard_duration");
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return -1;
+        return -1; // Hvis vi ikke fandt noget / fejl.
     }
 
-    public ObservableList<String> getTreatmentNames() {
+    public ObservableList<String> getTreatmentNames() { // Henter a
         ObservableList<String> treatmentList = FXCollections.observableArrayList();
         String query = "SELECT name FROM Treatment";
         try (Connection connection = DatabaseConnection.getConnection();
@@ -109,7 +109,7 @@ public class CreateRepository {
         return treatmentList;
     }
 
-    public ObservableList<String> getEmployeeNames() {
+    public ObservableList<String> getEmployeeNames() { // Henter alle navne på dem som arbejder der
         ObservableList<String> employeeList = FXCollections.observableArrayList();
         String query = "SELECT full_name FROM Employee";
         try (Connection connection = DatabaseConnection.getConnection();
@@ -137,7 +137,7 @@ public class CreateRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return -1;
+        return -1; // fandt intet
     }
 
     public int getEmployeeIdByName(String employeeName) {
@@ -153,7 +153,7 @@ public class CreateRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return -1;
+        return -1; // Fandt ikke noget - fejl
     }
 
     public double getTreatmentPriceByName(String treatmentName) {

@@ -13,8 +13,8 @@ public class Create {
     private int extraTime;
     private double extraCost;
 
-    public Create(String customerName, String customerPhone, String customerGender, int treatmentId,
-                  LocalDateTime appointmentDatetime, int employeeId, String status, int extraTime, double extraCost) {
+    // Create construktør til alle de felter der skal bruges når vi opretter en aftale.
+    public Create(String customerName, String customerPhone, String customerGender, int treatmentId, LocalDateTime appointmentDatetime, int employeeId, String status, int extraTime, double extraCost) {
         this.customerName = customerName;
         this.customerPhone = customerPhone;
         this.customerGender = customerGender;
@@ -26,6 +26,7 @@ public class Create {
         this.extraCost = extraCost;
     }
 
+    // ALle setters og getters, burde fjerne dem der ikke bruges.
     public String getCustomerName() {
         return customerName;
     }

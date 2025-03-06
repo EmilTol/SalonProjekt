@@ -18,9 +18,9 @@ public class LoginRepository {
     public boolean validateLogin(Login login) {
         String query = "SELECT * FROM employee WHERE username = ? AND password = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setString(1, login.getUsername());
-            preparedStatement.setString(2, login.getPassword());
-            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+            preparedStatement.setString(1, login.getUsername()); //Forbereder vores SQL statement
+            preparedStatement.setString(2, login.getPassword()); // -||-
+            try (ResultSet resultSet = preparedStatement.executeQuery()) { // Hvis vi får en række tilbage, er brugeren i db
                 if (resultSet.next()) {
                     return true;
                 }
@@ -28,6 +28,6 @@ public class LoginRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return false;
+        return false; // Ingen match / fejl giver false.
     }
 }

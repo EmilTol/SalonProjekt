@@ -11,7 +11,7 @@ public class AppointmentRepository {
 
     private DatabaseConnection dc;
 
-    public ObservableList<Appointment> gettingTable() {
+    public ObservableList<Appointment> gettingTable() { //Henter en liste over åbne aftaler ( kan ses i a.status = open )
         ObservableList<Appointment> list = FXCollections.observableArrayList();
 
         String query = "SELECT \n" +
@@ -47,8 +47,8 @@ public class AppointmentRepository {
                 String status = resultSet.getString("status");
 
                 Appointment appointment = new Appointment(customer_name, customerPhone, customerGender, treatmentName, treatmentPrice,
-                        treatmentDuration, appointmentDatetime, employeeName, status);
-                list.add(appointment);
+                        treatmentDuration, appointmentDatetime, employeeName, status); //
+                list.add(appointment); //Tilføjer til listen
             }
 
 
@@ -59,7 +59,7 @@ public class AppointmentRepository {
         return list;
     }
 
-    public ObservableList<Appointment> gettingOtherTable() {
+    public ObservableList<Appointment> gettingOtherTable() { //Same, men med færdige / aflyste
         ObservableList<Appointment> list = FXCollections.observableArrayList();
 
         String query = "SELECT \n" +
@@ -109,7 +109,7 @@ public class AppointmentRepository {
 
     public void updateAppointmentStatus(String customerName, String customerPhone, LocalDateTime appointmentDatetime, String employeeName, String newStatus) {
         String query = "UPDATE Appointment SET status = ? WHERE customer_name = ? AND customer_phone = ? AND appointment_datetime = ? AND employee_id = (SELECT id FROM Employee WHERE full_name = ?)";
-
+        // opdatere status på aftale.
         try (Connection connection = dc.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 

@@ -24,25 +24,23 @@ public class LoginController extends BaseController {
     private Label statusLabel;
 
     @FXML
-    public void initialize() {
+    public void initialize() { //Kaldes automatisk når scenen indlæses.
     }
 
     @FXML
     private void handleLoginButtonAction(ActionEvent event)  {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
+        String username = usernameField.getText(); // henter brugernavn fra felter
+        String password = passwordField.getText(); // Henter password fra felter
 
-        Login login = new Login(username, password);
-        boolean isValid = loginRepository.validateLogin(login);
-
+        Login login = new Login(username, password); // Laver et login objekt med data fra felter
+        boolean isValid = loginRepository.validateLogin(login); // sender det til repo for at tjekke om det er der - Ja, meget sikkert i know.
         if (isValid) {
             try {
-                sceneManager.switchTo("table");
+                sceneManager.switchTo("table"); // SKifter til table scene hvis valid
+                usernameField.clear(); // clear felt
+                passwordField.clear(); // clear eflt
 
-                usernameField.clear();
-                passwordField.clear();
-
-            } catch (IOException e) {
+            } catch (IOException e) { // burde have en bedre fejl honestly.
                 e.printStackTrace();
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Fejl");
@@ -50,7 +48,7 @@ public class LoginController extends BaseController {
                 alert.setContentText("Fejl");
                 alert.showAndWait();
             }
-        } else {
+        } else { // Hvis kode forkert får vi denne fejlbesked.
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Login fejl");
             alert.setHeaderText(null);
@@ -60,7 +58,6 @@ public class LoginController extends BaseController {
     }
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
+    public void initialize(URL url, ResourceBundle resourceBundle) { // uhhhh? Ikke helt sikker
     }
 }

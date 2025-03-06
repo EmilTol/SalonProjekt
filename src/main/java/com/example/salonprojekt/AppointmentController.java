@@ -94,12 +94,12 @@ public class AppointmentController extends BaseController implements Initializab
     }
     @FXML
     private void switchToEdit() throws IOException {
-        Appointment selectedRow = timeTable.getSelectionModel().getSelectedItem();
+        Appointment selectedRow = timeTable.getSelectionModel().getSelectedItem(); // Henter den valgte række.
         if (selectedRow == null) {
             showAlert("Ingen række valgt", "Vælg en række og prøv igen");
             return;
         }
-
+        // Henter data fra den valgte aftale
         String tableName = selectedRow.getCustomer_name();
         String tablePhone = selectedRow.getCustomerPhone();
         String tableGender = selectedRow.getCustomerGender();
