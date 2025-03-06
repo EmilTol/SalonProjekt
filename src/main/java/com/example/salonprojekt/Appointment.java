@@ -16,8 +16,7 @@ public class Appointment {
     private String status;
 
 
-    public Appointment(String customer_name, String customerPhone, String customerGender, String treatmentName, double treatmentPrice,
-                       int treatmentDuration, LocalDateTime appointmentDatetime, String employeeName, String status) {
+    public Appointment(String customer_name, String customerPhone, String customerGender, String treatmentName, double treatmentPrice, int treatmentDuration, LocalDateTime appointmentDatetime, String employeeName, String status) {
         this.customer_name = customer_name;
         this.customerPhone = customerPhone;
         this.customerGender = customerGender;
@@ -27,8 +26,6 @@ public class Appointment {
         this.appointmentDatetime = appointmentDatetime;
         this.employeeName = employeeName;
         this.status = status;
-
-
     }
 
     public String getCustomer_name() {

@@ -4,7 +4,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import javafx.fxml.FXML;
 import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
@@ -61,16 +60,16 @@ public class EditController extends BaseController implements Initializable {
 
     @Override
     public void initialize (URL url, ResourceBundle resourceBundle) {
-        EditDatabaseHandler editDatabaseHandler = new EditDatabaseHandler();
+        EditRepository editRepository = new EditRepository();
         genderBox.setItems(FXCollections.observableArrayList("M", "F"));
 
-        hairPeopleBox.setItems(FXCollections.observableArrayList(editDatabaseHandler.gettingHairPeople()));
+        hairPeopleBox.setItems(FXCollections.observableArrayList(editRepository.gettingHairPeople()));
 
-        treatmentBox.setItems(FXCollections.observableArrayList(editDatabaseHandler.gettingTreatments()));
+        treatmentBox.setItems(FXCollections.observableArrayList(editRepository.gettingTreatments()));
 
         treatmentBox.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                Edit selectedTreatment = editDatabaseHandler.getTreatmentDetails(newValue);
+                Edit selectedTreatment = editRepository.getTreatmentDetails(newValue);
                 if (selectedTreatment != null) {
                     price.setText(String.valueOf(selectedTreatment.getStandardPrice()));
                     duration.setText(String.valueOf(selectedTreatment.getStandardDuration()));
@@ -130,7 +129,7 @@ public class EditController extends BaseController implements Initializable {
         LocalDateTime updatedDateTime = LocalDateTime.of(updatedDate, updatedTime);
 
         // updatere databasen
-        boolean success = EditDatabaseHandler.updateAppointment(
+        boolean success = EditRepository.updateAppointment(
                 name, phone, LocalDateTime.of(date, time), // meget vigtig vi bruger dem og ikke updated
                 updatedName, updatedPhone, updatedGender,
                 updatedTreatment, updatedDateTime, updatedEmployee,

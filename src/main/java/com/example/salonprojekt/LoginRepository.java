@@ -5,11 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoginDatabaseHandler {
+public class LoginRepository {
     private Connection connection;
 
-    public LoginDatabaseHandler() {
-        connection = DatabaseConnection.getconnection();
+    public LoginRepository() {
+        connection = DatabaseConnection.getConnection();
         if (connection == null) {
             System.err.println("Ingen forbindelse");
         }

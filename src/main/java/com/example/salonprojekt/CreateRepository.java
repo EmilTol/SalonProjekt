@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-public class CreateDatabaseHandler {
+public class CreateRepository {
 
     public boolean insertAppointment(Create appointment) {
         int treatmentDuration = getTreatmentDurationById(appointment.getTreatmentId());
@@ -29,7 +29,7 @@ public class CreateDatabaseHandler {
         String query = "INSERT INTO Appointment (customer_name, customer_phone, customer_gender, treatment_id, " +
                 "appointment_datetime, employee_id, status, extra_time, extra_cost) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (Connection connection = DatabaseConnection.getconnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, appointment.getCustomerName());
             preparedStatement.setString(2, appointment.getCustomerPhone());
@@ -56,7 +56,7 @@ public class CreateDatabaseHandler {
                 "AND appointment_datetime < ? + INTERVAL ? MINUTE " +
                 "AND appointment_datetime + INTERVAL (SELECT standard_duration + extra_time FROM Treatment WHERE id = Appointment.treatment_id) MINUTE > ?";
 
-        try (Connection connection = DatabaseConnection.getconnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setInt(1, employeeId);
@@ -78,7 +78,7 @@ public class CreateDatabaseHandler {
     public int getTreatmentDurationById(int treatmentId) {
         String query = "SELECT standard_duration FROM Treatment WHERE id = ?";
 
-        try (Connection connection = DatabaseConnection.getconnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
             preparedStatement.setInt(1, treatmentId);
@@ -97,7 +97,7 @@ public class CreateDatabaseHandler {
     public ObservableList<String> getTreatmentNames() {
         ObservableList<String> treatmentList = FXCollections.observableArrayList();
         String query = "SELECT name FROM Treatment";
-        try (Connection connection = DatabaseConnection.getconnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
@@ -112,7 +112,7 @@ public class CreateDatabaseHandler {
     public ObservableList<String> getEmployeeNames() {
         ObservableList<String> employeeList = FXCollections.observableArrayList();
         String query = "SELECT full_name FROM Employee";
-        try (Connection connection = DatabaseConnection.getconnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
             while (resultSet.next()) {
@@ -126,7 +126,7 @@ public class CreateDatabaseHandler {
 
     public int getTreatmentIdByName(String treatmentName) {
         String query = "SELECT id FROM Treatment WHERE name = ?";
-        try (Connection connection = DatabaseConnection.getconnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, treatmentName);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -142,7 +142,7 @@ public class CreateDatabaseHandler {
 
     public int getEmployeeIdByName(String employeeName) {
         String query = "SELECT id FROM Employee WHERE full_name = ?";
-        try (Connection connection = DatabaseConnection.getconnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, employeeName);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -158,7 +158,7 @@ public class CreateDatabaseHandler {
 
     public double getTreatmentPriceByName(String treatmentName) {
         String query = "SELECT standard_price FROM Treatment WHERE name = ?";
-        try (Connection connection = DatabaseConnection.getconnection();
+        try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, treatmentName);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {

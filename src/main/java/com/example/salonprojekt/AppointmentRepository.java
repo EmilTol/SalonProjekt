@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 import java.sql.*;
 import java.time.LocalDateTime;
 
-public class AppointmentDatabaseHandler {
+public class AppointmentRepository {
 
 
     private DatabaseConnection dc;
@@ -29,22 +29,22 @@ public class AppointmentDatabaseHandler {
                 "JOIN Employee e ON a.employee_id = e.id\n" +
                 "WHERE a.status = 'open';";
 
-        try (Connection conn = dc.getconnection();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = dc.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
 
-            while (rs.next()) {
-                String customer_name = rs.getString("customer_name");
-                String customerPhone = rs.getString("customer_phone");
-                String customerGender = rs.getString("customer_gender");
-                String treatmentName = rs.getString("treatment_name");
-                Double treatmentPrice = rs.getDouble("treatment_price");
-                int treatmentDuration = rs.getInt("treatment_duration");
-                //der eksister ikke en LocalDateTime i rs. så man skal converter det til timestamp
-                Timestamp timestamp = rs.getTimestamp("appointment_datetime");
+            while (resultSet.next()) {
+                String customer_name = resultSet.getString("customer_name");
+                String customerPhone = resultSet.getString("customer_phone");
+                String customerGender = resultSet.getString("customer_gender");
+                String treatmentName = resultSet.getString("treatment_name");
+                Double treatmentPrice = resultSet.getDouble("treatment_price");
+                int treatmentDuration = resultSet.getInt("treatment_duration");
+                //der eksister ikke en LocalDateTime i resultSet. så man skal converter det til timestamp
+                Timestamp timestamp = resultSet.getTimestamp("appointment_datetime");
                 LocalDateTime appointmentDatetime = timestamp.toLocalDateTime();
-                String employeeName = rs.getString("employee_name");
-                String status = rs.getString("status");
+                String employeeName = resultSet.getString("employee_name");
+                String status = resultSet.getString("status");
 
                 Appointment appointment = new Appointment(customer_name, customerPhone, customerGender, treatmentName, treatmentPrice,
                         treatmentDuration, appointmentDatetime, employeeName, status);
@@ -77,22 +77,22 @@ public class AppointmentDatabaseHandler {
                 "JOIN Employee e ON a.employee_id = e.id\n" +
                 "WHERE a.status = 'closed' OR a.status = 'cancelled';";
 
-        try (Connection conn = dc.getconnection();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = dc.getConnection();
+             PreparedStatement preparedStatement = conn.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
 
-            while (rs.next()) {
-                String customer_name = rs.getString("customer_name");
-                String customerPhone = rs.getString("customer_phone");
-                String customerGender = rs.getString("customer_gender");
-                String treatmentName = rs.getString("treatment_name");
-                Double treatmentPrice = rs.getDouble("treatment_price");
-                int treatmentDuration = rs.getInt("treatment_duration");
-                //der eksister ikke en LocalDateTime i rs. så man skal converter det til timestamp
-                Timestamp timestamp = rs.getTimestamp("appointment_datetime");
+            while (resultSet.next()) {
+                String customer_name = resultSet.getString("customer_name");
+                String customerPhone = resultSet.getString("customer_phone");
+                String customerGender = resultSet.getString("customer_gender");
+                String treatmentName = resultSet.getString("treatment_name");
+                Double treatmentPrice = resultSet.getDouble("treatment_price");
+                int treatmentDuration = resultSet.getInt("treatment_duration");
+                //der eksister ikke en LocalDateTime i resultSet. så man skal converter det til timestamp
+                Timestamp timestamp = resultSet.getTimestamp("appointment_datetime");
                 LocalDateTime appointmentDatetime = timestamp.toLocalDateTime();
-                String employeeName = rs.getString("employee_name");
-                String status = rs.getString("status");
+                String employeeName = resultSet.getString("employee_name");
+                String status = resultSet.getString("status");
 
                 Appointment appointment = new Appointment(customer_name, customerPhone, customerGender, treatmentName, treatmentPrice,
                         treatmentDuration, appointmentDatetime, employeeName, status);
@@ -110,16 +110,16 @@ public class AppointmentDatabaseHandler {
     public void updateAppointmentStatus(String customerName, String customerPhone, LocalDateTime appointmentDatetime, String employeeName, String newStatus) {
         String query = "UPDATE Appointment SET status = ? WHERE customer_name = ? AND customer_phone = ? AND appointment_datetime = ? AND employee_id = (SELECT id FROM Employee WHERE full_name = ?)";
 
-        try (Connection conn = dc.getconnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection connection = dc.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            stmt.setString(1, newStatus);
-            stmt.setString(2, customerName);
-            stmt.setString(3, customerPhone);
-            stmt.setTimestamp(4, Timestamp.valueOf(appointmentDatetime));
-            stmt.setString(5, employeeName);
+            preparedStatement.setString(1, newStatus);
+            preparedStatement.setString(2, customerName);
+            preparedStatement.setString(3, customerPhone);
+            preparedStatement.setTimestamp(4, Timestamp.valueOf(appointmentDatetime));
+            preparedStatement.setString(5, employeeName);
 
-            int rowsUpdated = stmt.executeUpdate();
+            int rowsUpdated = preparedStatement.executeUpdate();
             if (rowsUpdated > 0) {
                 System.out.println("Opdatering lykkedes for aftale: " + customerName + " på " + appointmentDatetime);
             } else {
@@ -136,16 +136,16 @@ public class AppointmentDatabaseHandler {
         double extraCost = 0.0;
         String query = "SELECT extra_cost FROM Appointment WHERE customer_phone = ? AND employee_id = (SELECT id FROM Employee WHERE full_name = ?) AND appointment_datetime = ?";
 
-        try (Connection conn = DatabaseConnection.getconnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            stmt.setString(1, customerPhone);
-            stmt.setString(2, employeeName);
-            stmt.setTimestamp(3, Timestamp.valueOf(appointmentDatetime));
+            preparedStatement.setString(1, customerPhone);
+            preparedStatement.setString(2, employeeName);
+            preparedStatement.setTimestamp(3, Timestamp.valueOf(appointmentDatetime));
 
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                extraCost = rs.getDouble("extra_cost");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                extraCost = resultSet.getDouble("extra_cost");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -157,16 +157,16 @@ public class AppointmentDatabaseHandler {
         int extraTime = 0;
         String query = "SELECT extra_time FROM Appointment WHERE customer_phone = ? AND employee_id = (SELECT id FROM Employee WHERE full_name = ?) AND appointment_datetime = ?";
 
-        try (Connection conn = DatabaseConnection.getconnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            stmt.setString(1, customerPhone);
-            stmt.setString(2, employeeName);
-            stmt.setTimestamp(3, Timestamp.valueOf(appointmentDatetime));
+            preparedStatement.setString(1, customerPhone);
+            preparedStatement.setString(2, employeeName);
+            preparedStatement.setTimestamp(3, Timestamp.valueOf(appointmentDatetime));
 
-            ResultSet rs = stmt.executeQuery();
-            if (rs.next()) {
-                extraTime = rs.getInt("extra_time");
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                extraTime = resultSet.getInt("extra_time");
             }
         } catch (SQLException e) {
             e.printStackTrace();

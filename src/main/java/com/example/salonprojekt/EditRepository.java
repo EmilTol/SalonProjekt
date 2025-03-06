@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 import java.sql.*;
 import java.time.LocalDateTime;
 
-public class EditDatabaseHandler {
+public class EditRepository {
 
     private DatabaseConnection dc;
 
@@ -14,12 +14,12 @@ public class EditDatabaseHandler {
         ObservableList<String> list = FXCollections.observableArrayList();
         String query = "SELECT full_name FROM Employee";
 
-        try (Connection conn = dc.getconnection();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+        try (Connection connection = dc.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
 
-            while (rs.next()) {
-                list.add(rs.getString("full_name"));
+            while (resultSet.next()) {
+                list.add(resultSet.getString("full_name"));
             }
 
         } catch (SQLException e) {
@@ -33,12 +33,12 @@ public class EditDatabaseHandler {
         ObservableList<String> list = FXCollections.observableArrayList();
         String query = "SELECT name FROM Treatment";
 
-        try (Connection conn = dc.getconnection();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
+        try (Connection connection = dc.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
 
-            while (rs.next()) {
-                list.add(rs.getString("name"));
+            while (resultSet.next()) {
+                list.add(resultSet.getString("name"));
             }
 
         } catch (SQLException e) {
@@ -51,17 +51,17 @@ public class EditDatabaseHandler {
     public Edit getTreatmentDetails(String treatmentName) {
         String query = "SELECT name, standard_duration, standard_price FROM Treatment WHERE name = ?";
 
-        try (Connection conn = dc.getconnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection connection = dc.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            stmt.setString(1, treatmentName);
-            ResultSet rs = stmt.executeQuery();
+            preparedStatement.setString(1, treatmentName);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            if (rs.next()) {
+            if (resultSet.next()) {
                 return new Edit(
-                        rs.getString("name"),
-                        rs.getInt("standard_duration"),
-                        rs.getDouble("standard_price")
+                        resultSet.getString("name"),
+                        resultSet.getInt("standard_duration"),
+                        resultSet.getDouble("standard_price")
                 );
             }
 
@@ -92,30 +92,29 @@ public class EditDatabaseHandler {
                 "    a.employee_id = (SELECT id FROM Employee WHERE full_name = ?) " +
                 "WHERE a.customer_name = ? AND a.customer_phone = ? AND a.appointment_datetime = ?";
 
-        try (Connection conn = DatabaseConnection.getconnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(query)) {
 
-            pstmt.setString(1, newName);
-            pstmt.setString(2, newPhone);
-            pstmt.setString(3, newGender);
-            pstmt.setTimestamp(4, Timestamp.valueOf(newDateTime));
-            pstmt.setDouble(5, newExtraCost);
-            pstmt.setInt(6, newExtraTime);
-            pstmt.setString(7, newTreatment);
-            pstmt.setString(8, newEmployee);
+            preparedStatement.setString(1, newName);
+            preparedStatement.setString(2, newPhone);
+            preparedStatement.setString(3, newGender);
+            preparedStatement.setTimestamp(4, Timestamp.valueOf(newDateTime));
+            preparedStatement.setDouble(5, newExtraCost);
+            preparedStatement.setInt(6, newExtraTime);
+            preparedStatement.setString(7, newTreatment);
+            preparedStatement.setString(8, newEmployee);
 
             // det er her de "gamle" værdier er vigtige og bliver brugt
-            pstmt.setString(9, oldName); // oprindelige kundes navn
-            pstmt.setString(10, oldPhone); // oprindelige telefonnummer
-            pstmt.setTimestamp(11, Timestamp.valueOf(oldDateTime)); // oprindelige datetime
+            preparedStatement.setString(9, oldName); // oprindelige kundes navn
+            preparedStatement.setString(10, oldPhone); // oprindelige telefonnummer
+            preparedStatement.setTimestamp(11, Timestamp.valueOf(oldDateTime)); // oprindelige datetime
 
             // Eksekver opdateringen
-            int affectedRows = pstmt.executeUpdate();
+            int affectedRows = preparedStatement.executeUpdate();
             return affectedRows > 0; // Returner true hvis mindst én række blev opdateret
         } catch (SQLException e) {
             e.printStackTrace();
             return false; // Returner false hvis der opstod en fejl, ikke fucking rediger hvis du ik vil redigere
         }
     }
-        }
-
+}

@@ -48,21 +48,21 @@ public class CreateController extends BaseController implements Initializable {
     @FXML
     private TextField extraTimeField;
 
-    private CreateDatabaseHandler createDatabaseHandler = new CreateDatabaseHandler();
+    private CreateRepository createRepository = new CreateRepository();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         genderComboBox.getItems().addAll("M", "F");
 
-        ObservableList<String> treatments = createDatabaseHandler.getTreatmentNames();
+        ObservableList<String> treatments = createRepository.getTreatmentNames();
         treatmentComboBox.setItems(treatments);
 
-        ObservableList<String> employees = createDatabaseHandler.getEmployeeNames();
+        ObservableList<String> employees = createRepository.getEmployeeNames();
         employeeComboBox.setItems(employees);
 
         treatmentComboBox.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             if (newVal != null) {
-                double standardPrice = createDatabaseHandler.getTreatmentPriceByName(newVal);
+                double standardPrice = createRepository.getTreatmentPriceByName(newVal);
                 basePriceField.setText(String.valueOf(standardPrice));
             } else {
                 basePriceField.clear();
@@ -114,11 +114,11 @@ public class CreateController extends BaseController implements Initializable {
             }
         }
 
-        int treatmentId = createDatabaseHandler.getTreatmentIdByName(treatmentName);
-        int employeeId = createDatabaseHandler.getEmployeeIdByName(employeeName);
-        int treatmentDuration = createDatabaseHandler.getTreatmentDurationById(treatmentId);
+        int treatmentId = createRepository.getTreatmentIdByName(treatmentName);
+        int employeeId = createRepository.getEmployeeIdByName(employeeName);
+        int treatmentDuration = createRepository.getTreatmentDurationById(treatmentId);
 
-        boolean isAvailable = createDatabaseHandler.isTimeSlotAvailable(employeeId, appointmentDateTime, treatmentDuration + extraTime);
+        boolean isAvailable = createRepository.isTimeSlotAvailable(employeeId, appointmentDateTime, treatmentDuration + extraTime);
         if (!isAvailable) {
             showAlert("Tid kke tilgængelt", "Tid ikke tilgæng");
             return;
@@ -126,7 +126,7 @@ public class CreateController extends BaseController implements Initializable {
 
         Create appointment = new Create(customerName, customerPhone, customerGender, treatmentId, appointmentDateTime, employeeId, "open", extraTime, extraCost);
 
-        boolean success = createDatabaseHandler.insertAppointment(appointment);
+        boolean success = createRepository.insertAppointment(appointment);
         if (success) {
             showAlert("Success", "Aftalen er oprettet");
             clearFields();

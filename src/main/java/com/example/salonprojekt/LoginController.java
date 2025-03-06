@@ -1,8 +1,6 @@
 package com.example.salonprojekt;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
@@ -14,7 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LoginController extends BaseController {
-    private LoginDatabaseHandler loginDatabaseHandler = new LoginDatabaseHandler();
+    private LoginRepository loginRepository = new LoginRepository();
 
     @FXML
     private TextField usernameField;
@@ -35,7 +33,7 @@ public class LoginController extends BaseController {
         String password = passwordField.getText();
 
         Login login = new Login(username, password);
-        boolean isValid = loginDatabaseHandler.validateLogin(login);
+        boolean isValid = loginRepository.validateLogin(login);
 
         if (isValid) {
             try {
